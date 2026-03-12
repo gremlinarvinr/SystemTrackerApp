@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dttyyf3qfq1m0"]
+
+[ext_resource type="Script" uid="uid://bcymgjbnqxvrt" path="res://scripts/system_member.gd" id="1_l24wg"]
+
+[node name="SystemMember" type="Node2D" unique_id=991219024 groups=["system_members"]]
+script = ExtResource("1_l24wg")

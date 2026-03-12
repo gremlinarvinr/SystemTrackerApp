@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://bycm25ee83d2n"]
+
+[ext_resource type="FontFile" uid="uid://wtrcngvpj0kr" path="res://assets/fonts/Swansea-q3pd.ttf" id="1_3f3va"]
+
+[resource]
+default_font = ExtResource("1_3f3va")
+Label/fonts/font = ExtResource("1_3f3va")

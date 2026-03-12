@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://btsirhtouiwm3"]
+
+[ext_resource type="Script" uid="uid://blkiydsbsgn8e" path="res://classes/tooltip.gd" id="1_7dicn"]
+[ext_resource type="FontFile" uid="uid://wtrcngvpj0kr" path="res://assets/fonts/Swansea-q3pd.ttf" id="2_75wrl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7dicn"]
+bg_color = Color(0.26666668, 0.26666668, 0.26666668, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+expand_margin_left = 3.0
+expand_margin_top = 3.0
+expand_margin_right = 3.0
+expand_margin_bottom = 3.0
+
+[node name="Tooltip" type="Node" unique_id=1793313300]
+script = ExtResource("1_7dicn")
+metadata/_custom_type_script = "uid://blkiydsbsgn8e"
+
+[node name="Label" type="Label" parent="." unique_id=1664376752]
+visible = false
+offset_right = 7.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("2_75wrl")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_7dicn")
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="." unique_id=1912922664]
+wait_time = 0.45
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

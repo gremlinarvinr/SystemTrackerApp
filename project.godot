@@ -1,0 +1,56 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="Plural Tracker"
+config/version="0.0.1"
+run/main_scene="uid://crnq7po4n7ta1"
+config/features=PackedStringArray("4.6", "Mobile")
+run/low_processor_mode=true
+config/icon="res://icon.svg"
+
+[autoload]
+
+GlobalVariables="*uid://slo1br5u11ie"
+Enums="*uid://c2sfhjaqn0brl"
+
+[display]
+
+window/size/viewport_width=600
+window/size/viewport_height=600
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=5
+
+[dotnet]
+
+project/assembly_name="Plural Tracker"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/safe_resource_loader/plugin.cfg")
+
+[global_group]
+
+system_members=""
+labels=""
+
+[gui]
+
+fonts/dynamic_fonts/use_oversampling=false
+
+[rendering]
+
+renderer/rendering_method="mobile"
