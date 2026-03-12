@@ -1,8 +1,6 @@
 extends Node2D
 
-# HACK: temporary to load members
 var member_scene = preload("res://scenes/system_member.tscn")
-
 
 func _enter_tree() -> void:
 	# TODO: make sure mobile (if we ever do that,,) doesn't get wonky resolution !
@@ -15,25 +13,9 @@ func _ready() -> void:
 	# TODO: idk if this window size is still needed
 	#get_window().size_changed.connect(_on_window_size_changed)
 	#_on_window_size_changed() # call initially to make sure labels are correct sizes
-	load_data() # load first so user can't accidentally save 0 data
 	
-	#var sys1 = sysmember.instantiate()
-	#sys1.name = "Quentin"
-	#sys1.member_name = "Quentin"
-	#sys1.fronting = true
-	#add_child(sys1)
-	#
-	#var sys2 = sysmember.instantiate()
-	#sys2.name = "Aezi"
-	#sys2.member_name = "Aezi"
-	#sys2.fronting = true
-	#add_child(sys2)
-	#
-	#var sys3 = sysmember.instantiate()
-	#sys3.name = "Katarina"
-	#sys3.member_name = "Katarina"
-	#sys3.fronting = false
-	#add_child(sys3)
+	load_data() # load first so user can't accidentally save 0 data
+	#make_test_members() # make some test members
 
 # TY GODOTNEERS for the base <3
 func save_all():
@@ -66,10 +48,37 @@ func load_data():
 	# load members
 	for member in saved_data.all_members:
 		var member_node = member_scene.instantiate() 
-		add_child(member_node) # FIXME: members need to be added to right node
+		%MembersVBox.add_child(member_node) # FIXME: members need to be added to right node
 		if member_node.has_method("on_load_data"):
+			print("loading member")
 			member_node.on_load_data(member)
 
+
+func make_test_members():
+	var sys1 = member_scene.instantiate()
+	sys1.member_name = "Quentin"
+	sys1.pronouns = "he/they"
+	sys1.member_color = Color.DARK_RED
+	sys1.member_short_desc = "gamer boy with social anxiety"
+	sys1.fronting = true
+	%MembersVBox.add_child(sys1)
+	
+	var sys2 = member_scene.instantiate()
+	sys2.member_name = "Aezi"
+	sys2.pronouns = "they/he"
+	sys2.member_color = Color.MEDIUM_PURPLE
+	sys2.member_short_desc = "gamer nyanby with social anxiety"
+	sys2.fronting = false
+	%MembersVBox.add_child(sys2)
+	
+	var sys3 = member_scene.instantiate()
+	sys3.member_name = "Katarina"
+	sys3.pronouns = "she/her"
+	sys3.member_color = Color.RED
+	sys3.member_short_desc = "katatouille"
+	sys3.fronting = false
+	%MembersVBox.add_child(sys3)
+	
 
 # TODO: necessary? fixed font thing elsewhere
 func _on_window_size_changed():
@@ -88,3 +97,9 @@ func _on_window_size_changed():
 	else:
 		print("error with resolution detection")
 	print(str(new_window_size))
+
+
+# TODO: make MemberListUIVBox its own scene
+func _on_member_list_button_pressed() -> void:
+	$%MemberListUIVBox.visible = true
+	

@@ -1,5 +1,7 @@
 extends HBoxContainer
 
+# TODO: remove SaveDataBttn; instead save after certain user actions
+
 func _ready() -> void:
 	# loop through all buttons to set up hovers
 	for bttn in get_children():

@@ -1,6 +1,227 @@
-[gd_scene format=3 uid="uid://dttyyf3qfq1m0"]
+[gd_scene format=3 uid="uid://brwhuhr0xmb2p"]
 
-[ext_resource type="Script" uid="uid://bcymgjbnqxvrt" path="res://scripts/system_member.gd" id="1_l24wg"]
+[ext_resource type="FontFile" uid="uid://wtrcngvpj0kr" path="res://assets/fonts/Swansea-q3pd.ttf" id="1_3weft"]
+[ext_resource type="Script" uid="uid://bp3r3jsdgkxo4" path="res://scripts/system_member.gd" id="1_4po30"]
+[ext_resource type="Script" uid="uid://d1e1ay2y4hxgu" path="res://scripts/ui/generic_label.gd" id="2_4po30"]
+[ext_resource type="Script" uid="uid://dkg04ove4r7a3" path="res://scripts/ui/member_ctrl_grid.gd" id="3_iyw46"]
+[ext_resource type="Shader" uid="uid://djrlxspf05q68" path="res://assets/shaders/invert_shader.gdshader" id="4_1tdaa"]
+[ext_resource type="Texture2D" uid="uid://da1fyno0perti" path="res://assets/icons/user-plus-solid-full.svg" id="5_82ysp"]
+[ext_resource type="PackedScene" uid="uid://btsirhtouiwm3" path="res://scenes/tooltip.tscn" id="6_h4xv0"]
+[ext_resource type="Texture2D" uid="uid://4tbx4at6u3sd" path="res://assets/icons/magnifying-glass-solid-full.svg" id="6_jd7h2"]
+[ext_resource type="Texture2D" uid="uid://dodgf5cvfl7gw" path="res://assets/icons/comments-solid-full.svg" id="8_6bptl"]
+[ext_resource type="Texture2D" uid="uid://css7u2271v4e1" path="res://assets/icons/book-solid-full.svg" id="9_ut0k8"]
 
-[node name="SystemMember" type="Node2D" unique_id=991219024 groups=["system_members"]]
-script = ExtResource("1_l24wg")
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tefeu"]
+bg_color = Color(0.26666668, 0.26666668, 0.26666668, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o6xl0"]
+bg_color = Color(1, 1, 1, 1)
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_tefeu"]
+size = Vector2(85, 85)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a8y0u"]
+bg_color = Color(0.2, 0.2, 0.2, 1)
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trceg"]
+resource_local_to_scene = true
+shader = ExtResource("4_1tdaa")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a8y0u"]
+resource_local_to_scene = true
+shader = ExtResource("4_1tdaa")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jkv2x"]
+resource_local_to_scene = true
+shader = ExtResource("4_1tdaa")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+resource_local_to_scene = true
+shader = ExtResource("4_1tdaa")
+shader_parameter/invert = false
+
+[node name="SystemMember" type="PanelContainer" unique_id=1009616717 groups=["system_members"]]
+clip_children = 2
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 105.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tefeu")
+script = ExtResource("1_4po30")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=560497777]
+layout_mode = 2
+
+[node name="ColorBlock" type="ColorRect" parent="HBoxContainer" unique_id=27183472]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="AvatarMargin" type="MarginContainer" parent="HBoxContainer" unique_id=1136350937]
+layout_mode = 2
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="HBoxContainer/AvatarMargin" unique_id=2081936478]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_o6xl0")
+
+[node name="Avatar" type="TextureRect" parent="HBoxContainer/AvatarMargin" unique_id=1045557535]
+layout_mode = 2
+texture = SubResource("PlaceholderTexture2D_tefeu")
+stretch_mode = 5
+
+[node name="NamePronounsDesc" type="VBoxContainer" parent="HBoxContainer" unique_id=944589888]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameMargin" type="MarginContainer" parent="HBoxContainer/NamePronounsDesc" unique_id=534980175]
+layout_mode = 2
+theme_override_constants/margin_top = 14
+
+[node name="NameLabel" type="Label" parent="HBoxContainer/NamePronounsDesc/NameMargin" unique_id=1821215303 groups=["labels"]]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3weft")
+theme_override_font_sizes/font_size = 24
+text = "System Member Name ttttt"
+max_lines_visible = 1
+script = ExtResource("2_4po30")
+
+[node name="PronounsMargin" type="MarginContainer" parent="HBoxContainer/NamePronounsDesc" unique_id=2037644082]
+layout_mode = 2
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_bottom = 4
+
+[node name="PronounsLabel" type="Label" parent="HBoxContainer/NamePronounsDesc/PronounsMargin" unique_id=725951857]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3weft")
+theme_override_font_sizes/font_size = 20
+text = "they/them"
+
+[node name="ShortDescMargin" type="MarginContainer" parent="HBoxContainer/NamePronounsDesc" unique_id=414308797]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+
+[node name="ShortDescLabel" type="Label" parent="HBoxContainer/NamePronounsDesc/ShortDescMargin" unique_id=1104311071]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(2, 2)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3weft")
+theme_override_font_sizes/font_size = 14
+text = "small little description of a system membertttttttttttttttttttttttttttttttttttttttttttttttttt"
+autowrap_mode = 1
+max_lines_visible = 2
+
+[node name="MemberControlsMargin" type="MarginContainer" parent="HBoxContainer" unique_id=1175092913]
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 8
+
+[node name="Panel" type="Panel" parent="HBoxContainer/MemberControlsMargin" unique_id=1856078930]
+visible = false
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_a8y0u")
+
+[node name="ControlsGrid" type="GridContainer" parent="HBoxContainer/MemberControlsMargin" unique_id=1097592197]
+layout_mode = 2
+columns = 2
+script = ExtResource("3_iyw46")
+
+[node name="EditSeeMoreBttn" type="TextureButton" parent="HBoxContainer/MemberControlsMargin/ControlsGrid" unique_id=899336044]
+material = SubResource("ShaderMaterial_trceg")
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("6_jd7h2")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/EditSeeMoreBttn" unique_id=262154372 instance=ExtResource("6_h4xv0")]
+
+[node name="Label" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/EditSeeMoreBttn/Tooltip" index="0" unique_id=1664376752]
+text = "See more/edit"
+
+[node name="SwitchInBttn" type="TextureButton" parent="HBoxContainer/MemberControlsMargin/ControlsGrid" unique_id=912310561]
+material = SubResource("ShaderMaterial_a8y0u")
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("5_82ysp")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/SwitchInBttn" unique_id=1793313300 instance=ExtResource("6_h4xv0")]
+
+[node name="Label" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/SwitchInBttn/Tooltip" index="0" unique_id=1664376752]
+text = "Add/switch to front"
+
+[node name="LeaveNoteBttn" type="TextureButton" parent="HBoxContainer/MemberControlsMargin/ControlsGrid" unique_id=1213732505]
+material = SubResource("ShaderMaterial_jkv2x")
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("8_6bptl")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/LeaveNoteBttn" unique_id=446779485 instance=ExtResource("6_h4xv0")]
+
+[node name="Label" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/LeaveNoteBttn/Tooltip" index="0" unique_id=1664376752]
+text = "Leave a note"
+
+[node name="JournalBttn" type="TextureButton" parent="HBoxContainer/MemberControlsMargin/ControlsGrid" unique_id=2141336375]
+material = SubResource("ShaderMaterial_ya4ey")
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture_normal = ExtResource("9_ut0k8")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/JournalBttn" unique_id=1591148594 instance=ExtResource("6_h4xv0")]
+
+[node name="Label" parent="HBoxContainer/MemberControlsMargin/ControlsGrid/JournalBttn/Tooltip" index="0" unique_id=1664376752]
+text = "Access journal"
+
+[connection signal="mouse_entered" from="HBoxContainer/MemberControlsMargin/ControlsGrid/EditSeeMoreBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/EditSeeMoreBttn/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/MemberControlsMargin/ControlsGrid/EditSeeMoreBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/EditSeeMoreBttn/Tooltip" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/MemberControlsMargin/ControlsGrid/SwitchInBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/SwitchInBttn/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/MemberControlsMargin/ControlsGrid/SwitchInBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/SwitchInBttn/Tooltip" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/MemberControlsMargin/ControlsGrid/LeaveNoteBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/LeaveNoteBttn/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/MemberControlsMargin/ControlsGrid/LeaveNoteBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/LeaveNoteBttn/Tooltip" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/MemberControlsMargin/ControlsGrid/JournalBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/JournalBttn/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/MemberControlsMargin/ControlsGrid/JournalBttn" to="HBoxContainer/MemberControlsMargin/ControlsGrid/JournalBttn/Tooltip" method="_on_mouse_exited"]
+
+[editable path="HBoxContainer/MemberControlsMargin/ControlsGrid/EditSeeMoreBttn/Tooltip"]
+[editable path="HBoxContainer/MemberControlsMargin/ControlsGrid/SwitchInBttn/Tooltip"]
+[editable path="HBoxContainer/MemberControlsMargin/ControlsGrid/LeaveNoteBttn/Tooltip"]
+[editable path="HBoxContainer/MemberControlsMargin/ControlsGrid/JournalBttn/Tooltip"]
