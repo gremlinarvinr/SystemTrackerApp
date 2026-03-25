@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://cqcp1w52bw765"]
+
+[ext_resource type="Script" uid="uid://bhy7kf1b2uxdh" path="res://scripts/ui/add_member.gd" id="1_hhgp2"]
+[ext_resource type="Shader" uid="uid://djrlxspf05q68" path="res://assets/shaders/invert_shader.gdshader" id="2_qtndd"]
+[ext_resource type="Texture2D" uid="uid://cwb1glpcx2jpy" path="res://assets/icons/floppy-disk-solid-full.svg" id="3_l71kn"]
+[ext_resource type="PackedScene" uid="uid://btsirhtouiwm3" path="res://scenes/tooltip.tscn" id="4_khumw"]
+[ext_resource type="Texture2D" uid="uid://2og1n34iut8b" path="res://circle-user-solid-full.svg" id="5_bmj1r"]
+[ext_resource type="Texture2D" uid="uid://dtb57qab2rtxw" path="res://assets/icons/x-solid-full.svg" id="5_l71kn"]
+[ext_resource type="Script" uid="uid://362p2swcu3rs" path="res://scripts/ui/add_short_member_desc.gd" id="6_k0xhk"]
+[ext_resource type="Texture2D" uid="uid://cnsh2pujlqsaf" path="res://assets/icons/brush-solid-full.svg" id="7_khumw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_choun"]
+shader = ExtResource("2_qtndd")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmj1r"]
+shader = ExtResource("2_qtndd")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ya4ey"]
+shader = ExtResource("2_qtndd")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eb6dy"]
+shader = ExtResource("2_qtndd")
+shader_parameter/invert = false
+
+[node name="AddMemberUIMargin" type="MarginContainer" unique_id=435548138]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_hhgp2")
+
+[node name="AddMemberVBox" type="VBoxContainer" parent="." unique_id=383718675]
+layout_mode = 2
+
+[node name="TopStripHBox" type="HBoxContainer" parent="AddMemberVBox" unique_id=755404479]
+layout_mode = 2
+
+[node name="MemberNameEdit" type="LineEdit" parent="AddMemberVBox/TopStripHBox" unique_id=1558528865]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Member Name"
+max_length = 42
+
+[node name="SaveNewMember" type="TextureButton" parent="AddMemberVBox/TopStripHBox" unique_id=1698156817]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_choun")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("3_l71kn")
+texture_pressed = ExtResource("3_l71kn")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Tooltip" parent="AddMemberVBox/TopStripHBox/SaveNewMember" unique_id=1793313300 instance=ExtResource("4_khumw")]
+
+[node name="Label" parent="AddMemberVBox/TopStripHBox/SaveNewMember/Tooltip" index="0" unique_id=1664376752]
+text = "Save new member"
+
+[node name="ExitNewMember" type="TextureButton" parent="AddMemberVBox/TopStripHBox" unique_id=799017695]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_bmj1r")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("5_l71kn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="AddMemberVBox/TopStripHBox/ExitNewMember" unique_id=1440931453 instance=ExtResource("4_khumw")]
+
+[node name="Label" parent="AddMemberVBox/TopStripHBox/ExitNewMember/Tooltip" index="0" unique_id=1664376752]
+text = "Exit without saving"
+
+[node name="2ndStripHBox" type="HBoxContainer" parent="AddMemberVBox" unique_id=1795336355]
+layout_mode = 2
+
+[node name="MemberPrnsEdit" type="LineEdit" parent="AddMemberVBox/2ndStripHBox" unique_id=35381261]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Pronouns"
+max_length = 50
+
+[node name="AddNewMemberAvatar" type="TextureButton" parent="AddMemberVBox/2ndStripHBox" unique_id=2061045710]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_ya4ey")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("5_bmj1r")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Tooltip" parent="AddMemberVBox/2ndStripHBox/AddNewMemberAvatar" unique_id=898782636 instance=ExtResource("4_khumw")]
+
+[node name="Label" parent="AddMemberVBox/2ndStripHBox/AddNewMemberAvatar/Tooltip" index="0" unique_id=1664376752]
+text = "Add avatar"
+
+[node name="NewMemberColor" type="TextureButton" parent="AddMemberVBox/2ndStripHBox" unique_id=26517534]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_eb6dy")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("7_khumw")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Tooltip" parent="AddMemberVBox/2ndStripHBox/NewMemberColor" unique_id=1238890814 instance=ExtResource("4_khumw")]
+
+[node name="Label" parent="AddMemberVBox/2ndStripHBox/NewMemberColor/Tooltip" index="0" unique_id=1664376752]
+text = "Add color"
+
+[node name="ShortMemberDescEdit" type="TextEdit" parent="AddMemberVBox" unique_id=1025257082]
+layout_mode = 2
+size_flags_vertical = 3
+placeholder_text = "Short member description"
+script = ExtResource("6_k0xhk")
+
+[connection signal="text_changed" from="AddMemberVBox/TopStripHBox/MemberNameEdit" to="." method="_on_name_text_changed"]
+[connection signal="mouse_entered" from="AddMemberVBox/TopStripHBox/SaveNewMember" to="AddMemberVBox/TopStripHBox/SaveNewMember/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AddMemberVBox/TopStripHBox/SaveNewMember" to="AddMemberVBox/TopStripHBox/SaveNewMember/Tooltip" method="_on_mouse_exited"]
+[connection signal="pressed" from="AddMemberVBox/TopStripHBox/SaveNewMember" to="." method="_on_save_new_member_pressed"]
+[connection signal="mouse_entered" from="AddMemberVBox/TopStripHBox/ExitNewMember" to="AddMemberVBox/TopStripHBox/ExitNewMember/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AddMemberVBox/TopStripHBox/ExitNewMember" to="AddMemberVBox/TopStripHBox/ExitNewMember/Tooltip" method="_on_mouse_exited"]
+[connection signal="pressed" from="AddMemberVBox/TopStripHBox/ExitNewMember" to="." method="_on_exit_new_member_pressed"]
+[connection signal="text_changed" from="AddMemberVBox/2ndStripHBox/MemberPrnsEdit" to="." method="_on_pronouns_text_changed"]
+[connection signal="mouse_entered" from="AddMemberVBox/2ndStripHBox/AddNewMemberAvatar" to="AddMemberVBox/2ndStripHBox/AddNewMemberAvatar/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AddMemberVBox/2ndStripHBox/AddNewMemberAvatar" to="AddMemberVBox/2ndStripHBox/AddNewMemberAvatar/Tooltip" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="AddMemberVBox/2ndStripHBox/NewMemberColor" to="AddMemberVBox/2ndStripHBox/NewMemberColor/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AddMemberVBox/2ndStripHBox/NewMemberColor" to="AddMemberVBox/2ndStripHBox/NewMemberColor/Tooltip" method="_on_mouse_exited"]
+[connection signal="text_changed" from="AddMemberVBox/ShortMemberDescEdit" to="." method="_on_short_desc_text_changed"]
+[connection signal="text_changed" from="AddMemberVBox/ShortMemberDescEdit" to="AddMemberVBox/ShortMemberDescEdit" method="_on_text_changed"]
+
+[editable path="AddMemberVBox/TopStripHBox/SaveNewMember/Tooltip"]
+[editable path="AddMemberVBox/TopStripHBox/ExitNewMember/Tooltip"]
+[editable path="AddMemberVBox/2ndStripHBox/AddNewMemberAvatar/Tooltip"]
+[editable path="AddMemberVBox/2ndStripHBox/NewMemberColor/Tooltip"]

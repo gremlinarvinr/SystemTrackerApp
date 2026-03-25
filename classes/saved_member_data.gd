@@ -1,7 +1,6 @@
 class_name SavedMemberData
 extends Resource
 
-@export var scene_path:String # how to know which node to load
 @export var member_name:String
 @export var member_color:Color
 @export var pronouns:String

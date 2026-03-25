@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dikla403khxcv"]
+
+[ext_resource type="Script" uid="uid://g3eb7emcuigc" path="res://scripts/ui/menu_bar.gd" id="1_npew6"]
+[ext_resource type="Shader" uid="uid://djrlxspf05q68" path="res://assets/shaders/invert_shader.gdshader" id="2_055gy"]
+[ext_resource type="Texture2D" uid="uid://dcbe4d65d2t8h" path="res://assets/icons/plus-solid-full.svg" id="3_7j175"]
+[ext_resource type="PackedScene" uid="uid://btsirhtouiwm3" path="res://scenes/tooltip.tscn" id="4_77eqq"]
+[ext_resource type="Texture2D" uid="uid://cwb1glpcx2jpy" path="res://assets/icons/floppy-disk-solid-full.svg" id="5_8vjm7"]
+[ext_resource type="Texture2D" uid="uid://dwbmxmbyfnkmf" path="res://assets/icons/people-group-solid-full.svg" id="6_44yxc"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
+shader = ExtResource("2_055gy")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
+shader = ExtResource("2_055gy")
+shader_parameter/invert = false
+
+[node name="MenuBar" type="HBoxContainer" unique_id=1514460176]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 50.0
+grow_horizontal = 2
+script = ExtResource("1_npew6")
+
+[node name="AddMemberButton" type="TextureButton" parent="." unique_id=1489083376]
+material = SubResource("ShaderMaterial_tbgi4")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("3_7j175")
+texture_pressed = ExtResource("3_7j175")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Tooltip" parent="AddMemberButton" unique_id=1793313300 instance=ExtResource("4_77eqq")]
+
+[node name="Label" parent="AddMemberButton/Tooltip" index="0" unique_id=1664376752]
+text = "Add new member"
+
+[node name="SaveDataButton" type="TextureButton" parent="." unique_id=271252066]
+visible = false
+material = SubResource("ShaderMaterial_tbgi4")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("5_8vjm7")
+texture_pressed = ExtResource("5_8vjm7")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Tooltip" parent="SaveDataButton" unique_id=617301749 instance=ExtResource("4_77eqq")]
+
+[node name="Label" parent="SaveDataButton/Tooltip" index="0" unique_id=1664376752]
+text = "Save all data"
+
+[node name="MemberListButton" type="TextureButton" parent="." unique_id=959099538]
+material = SubResource("ShaderMaterial_tefeu")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("6_44yxc")
+texture_pressed = ExtResource("6_44yxc")
+ignore_texture_size = true
+stretch_mode = 4
+
+[node name="Tooltip" parent="MemberListButton" unique_id=61551037 instance=ExtResource("4_77eqq")]
+
+[node name="Label" parent="MemberListButton/Tooltip" index="0" unique_id=1664376752]
+text = "See member list"
+
+[connection signal="mouse_entered" from="AddMemberButton" to="AddMemberButton/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="AddMemberButton" to="AddMemberButton/Tooltip" method="_on_mouse_exited"]
+[connection signal="pressed" from="AddMemberButton" to="." method="_on_add_member_button_pressed"]
+[connection signal="mouse_entered" from="SaveDataButton" to="SaveDataButton/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="SaveDataButton" to="SaveDataButton/Tooltip" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="MemberListButton" to="MemberListButton/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="MemberListButton" to="MemberListButton/Tooltip" method="_on_mouse_exited"]
+[connection signal="pressed" from="MemberListButton" to="." method="_on_member_list_button_pressed"]
+
+[editable path="AddMemberButton/Tooltip"]
+[editable path="SaveDataButton/Tooltip"]
+[editable path="MemberListButton/Tooltip"]

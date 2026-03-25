@@ -29,6 +29,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_7dicn")
 vertical_alignment = 1
 
 [node name="Timer" type="Timer" parent="." unique_id=1912922664]
+unique_name_in_owner = true
 wait_time = 0.45
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

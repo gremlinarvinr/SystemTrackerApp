@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://c4utb83j8es5d"]
+
+[ext_resource type="Theme" uid="uid://bycm25ee83d2n" path="res://assets/themes/main_theme.tres" id="1_nfcn3"]
+[ext_resource type="Script" uid="uid://b1ld4c2ohyi54" path="res://scripts/ui/member_list_main.gd" id="1_r08iw"]
+
+[node name="MemberListMainUIMargin" type="MarginContainer" unique_id=577236843 groups=["loadables"]]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_r08iw")
+
+[node name="MemberList" type="VBoxContainer" parent="." unique_id=131117430]
+layout_mode = 2
+
+[node name="MemberListControls" type="HBoxContainer" parent="MemberList" unique_id=1961470587]
+layout_mode = 2
+
+[node name="MemberScroll" type="ScrollContainer" parent="MemberList" unique_id=1518848997]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MembersVBox" type="VBoxContainer" parent="MemberList/MemberScroll" unique_id=1246565361]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("1_nfcn3")
+theme_override_constants/separation = 5

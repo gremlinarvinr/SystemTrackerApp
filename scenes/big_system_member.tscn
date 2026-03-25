@@ -1,8 +1,25 @@
 [gd_scene format=3 uid="uid://c1feug8ly8f2o"]
 
+[ext_resource type="Script" uid="uid://dhsc17q1tjcch" path="res://scripts/ui/big_system_member.gd" id="1_1xtxe"]
 [ext_resource type="Texture2D" uid="uid://cwb1glpcx2jpy" path="res://assets/icons/floppy-disk-solid-full.svg" id="1_6vf4w"]
 [ext_resource type="FontFile" uid="uid://wtrcngvpj0kr" path="res://assets/fonts/Swansea-q3pd.ttf" id="2_wg38u"]
 [ext_resource type="Texture2D" uid="uid://dtb57qab2rtxw" path="res://assets/icons/x-solid-full.svg" id="3_y8pqc"]
+[ext_resource type="Texture2D" uid="uid://b0gd4ncmdoby1" path="res://assets/user-secret-solid-full.svg" id="4_m5rfq"]
+[ext_resource type="Texture2D" uid="uid://bbiyfhdmadet1" path="res://assets/icons/pencil-solid-full.svg" id="4_v0ot2"]
+[ext_resource type="PackedScene" uid="uid://btsirhtouiwm3" path="res://scenes/tooltip.tscn" id="5_hg52d"]
+[ext_resource type="Shader" uid="uid://djrlxspf05q68" path="res://assets/shaders/invert_shader.gdshader" id="6_3a6ld"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3a6ld"]
+shader = ExtResource("6_3a6ld")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kujd2"]
+shader = ExtResource("6_3a6ld")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_beg0a"]
+shader = ExtResource("6_3a6ld")
+shader_parameter/invert = false
 
 [node name="BigSystemMember" type="VBoxContainer" unique_id=766815764]
 anchors_preset = 15
@@ -12,6 +29,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_1xtxe")
 
 [node name="TopBarMargin" type="MarginContainer" parent="." unique_id=1262495375]
 layout_mode = 2
@@ -21,10 +39,6 @@ theme_override_constants/margin_right = 5
 theme_override_constants/margin_bottom = 10
 
 [node name="TopBar" type="HBoxContainer" parent="TopBarMargin" unique_id=2048097346]
-layout_mode = 2
-
-[node name="ColorBlock" type="ColorRect" parent="TopBarMargin/TopBar" unique_id=429265395]
-custom_minimum_size = Vector2(10, 0)
 layout_mode = 2
 
 [node name="NamePronounsVBox" type="VBoxContainer" parent="TopBarMargin/TopBar" unique_id=2139997367]
@@ -48,7 +62,40 @@ theme_override_fonts/font = ExtResource("2_wg38u")
 theme_override_font_sizes/font_size = 18
 text = "they/them"
 
+[node name="EditNamePrnnVBox" type="VBoxContainer" parent="TopBarMargin/TopBar" unique_id=1070090113]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EditName" type="LineEdit" parent="TopBarMargin/TopBar/EditNamePrnnVBox" unique_id=654477908]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_wg38u")
+theme_override_font_sizes/font_size = 20
+text = "Big Member Name"
+
+[node name="EditPronouns" type="LineEdit" parent="TopBarMargin/TopBar/EditNamePrnnVBox" unique_id=1588058613]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_wg38u")
+theme_override_font_sizes/font_size = 18
+text = "they/them"
+
+[node name="EditPage" type="TextureButton" parent="TopBarMargin/TopBar" unique_id=239178105]
+material = SubResource("ShaderMaterial_3a6ld")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_v0ot2")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="TopBarMargin/TopBar/EditPage" unique_id=1793313300 instance=ExtResource("5_hg52d")]
+
+[node name="Label" parent="TopBarMargin/TopBar/EditPage/Tooltip" index="0" unique_id=1664376752]
+text = "edit basic info"
+
 [node name="SaveBttn" type="TextureButton" parent="TopBarMargin/TopBar" unique_id=1462480528]
+material = SubResource("ShaderMaterial_kujd2")
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture_normal = ExtResource("1_6vf4w")
@@ -56,8 +103,84 @@ ignore_texture_size = true
 stretch_mode = 5
 
 [node name="ExitBttn" type="TextureButton" parent="TopBarMargin/TopBar" unique_id=1193230684]
+material = SubResource("ShaderMaterial_beg0a")
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 texture_normal = ExtResource("3_y8pqc")
 ignore_texture_size = true
 stretch_mode = 5
+
+[node name="Tooltip" parent="TopBarMargin/TopBar/ExitBttn" unique_id=44518852 instance=ExtResource("5_hg52d")]
+
+[node name="Label" parent="TopBarMargin/TopBar/ExitBttn/Tooltip" index="0" unique_id=1664376752]
+text = "Back to member list"
+
+[node name="TabStripMargin" type="MarginContainer" parent="." unique_id=2113529351]
+layout_mode = 2
+
+[node name="TabStrip" type="HBoxContainer" parent="TabStripMargin" unique_id=1527146216]
+layout_mode = 2
+alignment = 2
+
+[node name="MainPage" type="VBoxContainer" parent="." unique_id=1645451397]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AvatarMargin" type="MarginContainer" parent="MainPage" unique_id=1438558984]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="AvatarVBox" type="VBoxContainer" parent="MainPage/AvatarMargin" unique_id=238907659]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ColorBlockT" type="ColorRect" parent="MainPage/AvatarMargin/AvatarVBox" unique_id=2017974694]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="AvatarHBox" type="HBoxContainer" parent="MainPage/AvatarMargin/AvatarVBox" unique_id=552947117]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorBlockL" type="ColorRect" parent="MainPage/AvatarMargin/AvatarVBox/AvatarHBox" unique_id=429265395]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="MainPage/AvatarMargin/AvatarVBox/AvatarHBox" unique_id=1671370199]
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("4_m5rfq")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ColorBlockR" type="ColorRect" parent="MainPage/AvatarMargin/AvatarVBox/AvatarHBox" unique_id=1882761114]
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ColorBlockB" type="ColorRect" parent="MainPage/AvatarMargin/AvatarVBox" unique_id=1952350059]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="DescriptionMargin" type="MarginContainer" parent="MainPage" unique_id=1534627513]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 8
+
+[node name="Description" type="RichTextLabel" parent="MainPage/DescriptionMargin" unique_id=671654152]
+layout_mode = 2
+text = "text"
+
+[node name="EditDescription" type="TextEdit" parent="MainPage/DescriptionMargin" unique_id=1694660932]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="TopBarMargin/TopBar/ExitBttn" to="." method="_on_exit_bttn_pressed"]
+
+[editable path="TopBarMargin/TopBar/EditPage/Tooltip"]
+[editable path="TopBarMargin/TopBar/ExitBttn/Tooltip"]

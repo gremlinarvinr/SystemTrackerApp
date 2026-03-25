@@ -1,28 +1,15 @@
 [gd_scene format=3 uid="uid://crnq7po4n7ta1"]
 
 [ext_resource type="Script" uid="uid://dslfr163kw6il" path="res://scripts/main.gd" id="1_o5qli"]
-[ext_resource type="Texture2D" uid="uid://cwb1glpcx2jpy" path="res://assets/icons/floppy-disk-solid-full.svg" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://g3eb7emcuigc" path="res://scripts/ui/menu_bar.gd" id="2_tbgi4"]
-[ext_resource type="Texture2D" uid="uid://dwbmxmbyfnkmf" path="res://assets/icons/people-group-solid-full.svg" id="3_sugp2"]
-[ext_resource type="Shader" uid="uid://djrlxspf05q68" path="res://assets/shaders/invert_shader.gdshader" id="4_tbgi4"]
-[ext_resource type="PackedScene" uid="uid://btsirhtouiwm3" path="res://scenes/tooltip.tscn" id="5_tefeu"]
-[ext_resource type="Theme" uid="uid://bycm25ee83d2n" path="res://assets/themes/main_theme.tres" id="7_o6xl0"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o5qli"]
 bg_color = Color(0.2, 0.2, 0.2, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tbgi4"]
-shader = ExtResource("4_tbgi4")
-shader_parameter/invert = false
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tefeu"]
-shader = ExtResource("4_tbgi4")
-shader_parameter/invert = false
 
 [node name="Main" type="Node2D" unique_id=1665345755]
 script = ExtResource("1_o5qli")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=228494282]
+follow_viewport_enabled = true
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=320266967]
 layout_mode = 3
@@ -47,7 +34,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_styles/panel = SubResource("StyleBoxFlat_o5qli")
 
-[node name="MemberListUIVBox" type="VBoxContainer" parent="CanvasLayer/Control/Background" unique_id=686723919]
+[node name="MainVBox" type="VBoxContainer" parent="CanvasLayer/Control/Background" unique_id=686723919]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -55,71 +42,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="MenuBar" type="HBoxContainer" parent="CanvasLayer/Control/Background/MemberListUIVBox" unique_id=1903510837]
-layout_mode = 2
-script = ExtResource("2_tbgi4")
-
-[node name="SaveDataButton" type="TextureButton" parent="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar" unique_id=424846949]
-material = SubResource("ShaderMaterial_tbgi4")
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture_normal = ExtResource("2_0wfyh")
-texture_pressed = ExtResource("2_0wfyh")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Tooltip" parent="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton" unique_id=1793313300 instance=ExtResource("5_tefeu")]
-
-[node name="Label" parent="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton/Tooltip" index="0" unique_id=1664376752]
-text = "Save all data"
-
-[node name="MemberListButton" type="TextureButton" parent="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar" unique_id=219329221]
-material = SubResource("ShaderMaterial_tefeu")
-custom_minimum_size = Vector2(50, 50)
-layout_mode = 2
-texture_normal = ExtResource("3_sugp2")
-texture_pressed = ExtResource("3_sugp2")
-ignore_texture_size = true
-stretch_mode = 4
-
-[node name="Tooltip" parent="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton" unique_id=350225050 instance=ExtResource("5_tefeu")]
-
-[node name="Label" parent="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton/Tooltip" index="0" unique_id=1664376752]
-text = "See member list"
-
-[node name="MemberListMainUIMargin" type="MarginContainer" parent="CanvasLayer/Control/Background/MemberListUIVBox" unique_id=1346050123]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/margin_left = 8
-theme_override_constants/margin_top = 0
-theme_override_constants/margin_right = 8
-theme_override_constants/margin_bottom = 8
-
-[node name="MemberList" type="VBoxContainer" parent="CanvasLayer/Control/Background/MemberListUIVBox/MemberListMainUIMargin" unique_id=191802862]
-layout_mode = 2
-
-[node name="MemberListControls" type="HBoxContainer" parent="CanvasLayer/Control/Background/MemberListUIVBox/MemberListMainUIMargin/MemberList" unique_id=1961267392]
-layout_mode = 2
-
-[node name="MemberScroll" type="ScrollContainer" parent="CanvasLayer/Control/Background/MemberListUIVBox/MemberListMainUIMargin/MemberList" unique_id=1212182742]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="MembersVBox" type="VBoxContainer" parent="CanvasLayer/Control/Background/MemberListUIVBox/MemberListMainUIMargin/MemberList/MemberScroll" unique_id=2048211338]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("7_o6xl0")
-theme_override_constants/separation = 5
-
-[connection signal="mouse_entered" from="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton" to="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton/Tooltip" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton" to="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton/Tooltip" method="_on_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton" to="." method="save_all"]
-[connection signal="mouse_entered" from="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton" to="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton/Tooltip" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton" to="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton/Tooltip" method="_on_mouse_exited"]
-[connection signal="pressed" from="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton" to="." method="_on_member_list_button_pressed"]
-
-[editable path="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/SaveDataButton/Tooltip"]
-[editable path="CanvasLayer/Control/Background/MemberListUIVBox/MenuBar/MemberListButton/Tooltip"]

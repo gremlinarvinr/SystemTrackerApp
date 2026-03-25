@@ -46,6 +46,7 @@ enabled=PackedStringArray("res://addons/Todo_Manager/plugin.cfg", "res://addons/
 
 system_members=""
 labels=""
+loadables="scenes that load data on instancing"
 
 [gui]
 

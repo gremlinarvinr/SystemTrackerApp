@@ -1,5 +1,6 @@
 extends PanelContainer
 
+@export var member_id:int
 @export var member_name:String # TODO: validate length
 @export var member_color:Color 
 @export var member_avatar:Texture2D
@@ -7,6 +8,8 @@ extends PanelContainer
 @export var member_short_desc:String # TODO: validate length
 
 @export var fronting:bool
+
+signal see_big_member
 
 func _ready() -> void:
 	%ColorBlock.color = member_color
@@ -29,7 +32,9 @@ func on_save_data(saved_members:Array[SavedMemberData], fronting_members:Array[S
 		fronting_members.append(my_data) 
 
 
-func on_load_data(saved_data:SavedMemberData):
+func on_load_data(saved_data:SavedMemberData, new_id:int):
+	member_id = new_id
+	
 	member_color = saved_data.member_color
 	%ColorBlock.color = member_color
 	
@@ -43,5 +48,7 @@ func on_load_data(saved_data:SavedMemberData):
 	%ShortDescLabel.text = member_short_desc
 	
 	fronting = saved_data.fronting
-	
-	
+
+
+func _on_see_big_profile() -> void:
+	emit_signal("see_big_member", member_id)

@@ -1,23 +1,46 @@
 extends Node2D
 
-var member_scene = preload("res://scenes/system_member.tscn")
+var menu_bar_scene = preload("res://scenes/menu_bar.tscn")
+var member_list_scene = preload("res://scenes/member_list_main.tscn")
+var add_member_scene = preload("res://scenes/add_member.tscn")
+var big_system_member_scene = preload("res://scenes/big_system_member.tscn")
 
 func _enter_tree() -> void:
 	# TODO: make sure mobile (if we ever do that,,) doesn't get wonky resolution !
 	#if OS.get_name() == "Windows" || OS.get_name() == "macOS" || OS.get_name() == "Linux":
 		#get_tree().root.min_size = Vector2i(720, 720) # TODO: idk if this is best practice? 
-	get_tree().get_root().min_size = Vector2i(720, 720) # TODO: idk if this is best practice? 
-	
+	get_tree().get_root().min_size = Vector2i(600, 600) # TODO: idk if this is best practice? 
 	
 func _ready() -> void:
 	# TODO: idk if this window size is still needed
 	#get_window().size_changed.connect(_on_window_size_changed)
 	#_on_window_size_changed() # call initially to make sure labels are correct sizes
 	
-	load_data() # load first so user can't accidentally save 0 data
-	#make_test_members() # make some test members
+	# load menu bar and connect buttons, load member list and data
+	switch_to_member_list()
+
+
+func get_menu():
+	var menu_bar = menu_bar_scene.instantiate()
+	%MainVBox.add_child(menu_bar)
+	menu_bar.connect("add_member_bttn_pressed", _on_add_member_button_pressed)
+	menu_bar.connect("member_list_bttn_pressed", _on_member_list_button_pressed)
+
+
+func switch_to_member_list():
+	for child in $%MainVBox.get_children():
+			child.queue_free()
+	get_menu()
+	var member_list = member_list_scene.instantiate()
+	%MainVBox.add_child(member_list)
+	member_list.switch_to_big_member.connect(_on_load_big_member)
+	load_data() # load everything
+
+
+# TODO: save whenever something is created/edited
 
 # TY GODOTNEERS for the base <3
+# OLDGE ,, TODO: delete this once a better thing is added, ,,  , ,
 func save_all():
 	# first create what will hold all the saved data
 	var saved_data:SavedData = SavedData.new() 
@@ -35,6 +58,7 @@ func save_all():
 	ResourceSaver.save(saved_data, GlobalVariables.main_save_path)
 
 
+# TY GODOTNEERS FOR THE BASE
 func load_data():
 	var saved_data:SavedData = SafeResourceLoader.load(GlobalVariables.main_save_path) as SavedData
 	
@@ -44,41 +68,10 @@ func load_data():
 		
 	# TODO: anything that must be done before loading
 	
-	# TODO: maybe separate this somehow so that scene changes can be smoother,, purrhaps a dictionary?
-	# load members
-	for member in saved_data.all_members:
-		var member_node = member_scene.instantiate() 
-		%MembersVBox.add_child(member_node) # FIXME: members need to be added to right node
-		if member_node.has_method("on_load_data"):
-			print("loading member")
-			member_node.on_load_data(member)
+	# TODO: check what to load rn
+	# load all the members in the member list
+	get_tree().call_group("loadables", "load_data", saved_data)
 
-
-func make_test_members():
-	var sys1 = member_scene.instantiate()
-	sys1.member_name = "Quentin"
-	sys1.pronouns = "he/they"
-	sys1.member_color = Color.DARK_RED
-	sys1.member_short_desc = "gamer boy with social anxiety"
-	sys1.fronting = true
-	%MembersVBox.add_child(sys1)
-	
-	var sys2 = member_scene.instantiate()
-	sys2.member_name = "Aezi"
-	sys2.pronouns = "they/he"
-	sys2.member_color = Color.MEDIUM_PURPLE
-	sys2.member_short_desc = "gamer nyanby with social anxiety"
-	sys2.fronting = false
-	%MembersVBox.add_child(sys2)
-	
-	var sys3 = member_scene.instantiate()
-	sys3.member_name = "Katarina"
-	sys3.pronouns = "she/her"
-	sys3.member_color = Color.RED
-	sys3.member_short_desc = "katatouille"
-	sys3.fronting = false
-	%MembersVBox.add_child(sys3)
-	
 
 # TODO: necessary? fixed font thing elsewhere
 func _on_window_size_changed():
@@ -99,7 +92,35 @@ func _on_window_size_changed():
 	print(str(new_window_size))
 
 
-# TODO: make MemberListUIVBox its own scene
 func _on_member_list_button_pressed() -> void:
-	$%MemberListUIVBox.visible = true
-	
+	switch_to_member_list()
+
+
+func _on_add_member_button_pressed() -> void:
+	for child in $%MainVBox.get_children():
+			child.queue_free()
+	var add_member = add_member_scene.instantiate()
+	add_member.added_member.connect(_on_added_member)
+	add_member.exited_add_member.connect(_on_exit_add_member)
+	%MainVBox.add_child(add_member)
+
+
+func _on_added_member() -> void:
+	switch_to_member_list()
+
+
+func _on_exit_add_member() -> void:
+	switch_to_member_list()
+
+
+func _on_load_big_member(member_id: int):
+	for child in $%MainVBox.get_children():
+		child.queue_free()
+	var big_member = big_system_member_scene.instantiate()
+	big_member.connect("big_member_exit", _on_big_member_exit)
+	%MainVBox.add_child(big_member)
+	big_member.load_data(member_id)
+
+
+func _on_big_member_exit():
+	switch_to_member_list()

@@ -27,37 +27,45 @@ func _process(delta: float) -> void:
 			
 		extents = %Label.size
 		var viewport_border = get_viewport().size - Vector2i(padding)
-		var base_pos = get_viewport().get_mouse_position()
+		var base_pos = %Label.get_global_mouse_position()
 		
 		#print("extents: " + str(extents) + "; mouse: " + str(base_pos))
 		
 		# FIXME: doesn't always flip? maybe cuz it doesnt'wrap idk 
 		# test if needs to display to the left
+		#print(viewport_border)
 		#print("math: "+ str(base_pos.x + offset.x + extents.x))
-		if (base_pos.x + offset.x + extents.x) < viewport_border.x:
+		#print((base_pos.x + offset.x + extents.x) > viewport_border.x)
+		if (base_pos.x + offset.x + extents.x) > viewport_border.x:
 			final_x = base_pos.x - offset.x - extents.x
 		else:
 			final_x = base_pos.x - offset.x
 		# test if needs to display above
-		final_y = base_pos.y - extents.y + offset.y
-		if final_y > viewport_border.y:
+		#final_y = base_pos.y - extents.y - offset.y
+		#if final_y > viewport_border.y:
+			#final_y = base_pos.y - offset.y
+		#print("math y: "+ str(base_pos.y + offset.y + extents.y))
+		#print((base_pos.y + offset.y + extents.y) > viewport_border.y)
+		if (base_pos.y + offset.y + extents.y) > viewport_border.y:
+			final_y = base_pos.y - offset.y - extents.y
+		else:
 			final_y = base_pos.y - offset.y
 		%Label.position = Vector2i(final_x, final_y)
 
 
 func set_tooltip(description):
-	self.get_node("Label").text = description
+	%Label.text = description
 
 
 func _on_mouse_entered() -> void:
-	get_node("Timer").paused = false
-	get_node("Timer").start()
+	%Timer.paused = false
+	%Timer.start()
 
 
 func _on_mouse_exited() -> void:
-	self.get_node("Label").hide()
-	get_node("Timer").paused = true
+	%Label.hide()
+	%Timer.paused = true
 
 
 func _on_timer_timeout() -> void:
-	self.get_node("Label").show()
+	%Label.show()
