@@ -3,14 +3,15 @@ extends Node2D
 var menu_bar_scene = preload("res://scenes/menu_bar.tscn")
 var member_list_scene = preload("res://scenes/member_list_main.tscn")
 var add_member_scene = preload("res://scenes/add_member.tscn")
-var big_system_member_scene = preload("res://scenes/big_system_member.tscn")
+var big_system_member_scene = preload("res://scenes/big_system_member/big_system_member.tscn")
 
 func _enter_tree() -> void:
 	# TODO: make sure mobile (if we ever do that,,) doesn't get wonky resolution !
 	#if OS.get_name() == "Windows" || OS.get_name() == "macOS" || OS.get_name() == "Linux":
 		#get_tree().root.min_size = Vector2i(720, 720) # TODO: idk if this is best practice? 
 	get_tree().get_root().min_size = Vector2i(600, 600) # TODO: idk if this is best practice? 
-	
+
+
 func _ready() -> void:
 	# TODO: idk if this window size is still needed
 	#get_window().size_changed.connect(_on_window_size_changed)

@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://cwypqc65wdg2m"]
+
+[ext_resource type="Script" uid="uid://bop6mpoaxayvl" path="res://scripts/ui/big_system_member/main_page.gd" id="1_6j3wv"]
+[ext_resource type="Texture2D" uid="uid://b0gd4ncmdoby1" path="res://assets/user-secret-solid-full.svg" id="1_fiqv8"]
+
+[node name="MainPage" type="VBoxContainer" unique_id=2060285298]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_6j3wv")
+
+[node name="AvatarMargin" type="MarginContainer" parent="." unique_id=1875194217]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="AvatarVBox" type="VBoxContainer" parent="AvatarMargin" unique_id=944201874]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ColorBlockT" type="ColorRect" parent="AvatarMargin/AvatarVBox" unique_id=1951348312]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="AvatarHBox" type="HBoxContainer" parent="AvatarMargin/AvatarVBox" unique_id=784331050]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ColorBlockL" type="ColorRect" parent="AvatarMargin/AvatarVBox/AvatarHBox" unique_id=1393711603]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="Avatar" type="TextureRect" parent="AvatarMargin/AvatarVBox/AvatarHBox" unique_id=1169521332]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_fiqv8")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ColorBlockR" type="ColorRect" parent="AvatarMargin/AvatarVBox/AvatarHBox" unique_id=2124393783]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 0)
+layout_mode = 2
+
+[node name="ColorBlockB" type="ColorRect" parent="AvatarMargin/AvatarVBox" unique_id=360482444]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+
+[node name="DescriptionMargin" type="MarginContainer" parent="." unique_id=921203568]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 8
+
+[node name="ScrollContainer" type="ScrollContainer" parent="DescriptionMargin" unique_id=2049074060]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="Description" type="RichTextLabel" parent="DescriptionMargin/ScrollContainer" unique_id=1123399930]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "text"

@@ -9,6 +9,7 @@ bg_color = Color(0.2, 0.2, 0.2, 1)
 script = ExtResource("1_o5qli")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=228494282]
+layer = 5
 follow_viewport_enabled = true
 
 [node name="Control" type="Control" parent="CanvasLayer" unique_id=320266967]

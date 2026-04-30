@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://diehpvk32tdjg"]
+
+[ext_resource type="Script" uid="uid://bj2g383kkr0jo" path="res://scripts/ui/color_picker.gd" id="1_xt0lc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xt0lc"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="ColorPicker" type="ColorPicker" unique_id=685067498]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -149.0
+offset_top = 4.0
+offset_right = 149.0
+offset_bottom = 611.0
+grow_horizontal = 2
+edit_alpha = false
+edit_intensity = false
+script = ExtResource("1_xt0lc")
+
+[node name="Panel" type="Panel" parent="." unique_id=718599134]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xt0lc")

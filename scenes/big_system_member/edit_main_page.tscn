@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://b4o4otq5gbosj"]
+
+[ext_resource type="Script" uid="uid://dinv3hbio3dpu" path="res://scripts/ui/big_system_member/edit_main_page.gd" id="1_qd7a2"]
+[ext_resource type="Shader" uid="uid://djrlxspf05q68" path="res://assets/shaders/invert_shader.gdshader" id="3_3gqxi"]
+[ext_resource type="PackedScene" uid="uid://btsirhtouiwm3" path="res://scenes/tooltip.tscn" id="5_wnwkq"]
+[ext_resource type="Texture2D" uid="uid://d4iuesucjhnfa" path="res://assets/icons/image-portrait-solid-full.svg" id="6_g0npv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vlyrn"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qd7a2"]
+bg_color = Color(0.32667947, 0.3266795, 0.32667938, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vlyrn"]
+shader = ExtResource("3_3gqxi")
+shader_parameter/invert = false
+
+[node name="EditMainPage" type="VBoxContainer" unique_id=2060285298]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_qd7a2")
+
+[node name="AvatarMargin" type="MarginContainer" parent="." unique_id=1875194217]
+clip_contents = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="EditAvatarColor" type="HBoxContainer" parent="AvatarMargin" unique_id=1578100884]
+layout_mode = 2
+
+[node name="EditColorContainer" type="PanelContainer" parent="AvatarMargin/EditAvatarColor" unique_id=2116117568]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_vlyrn")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AvatarMargin/EditAvatarColor/EditColorContainer" unique_id=1909801241]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qd7a2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AvatarMargin/EditAvatarColor/EditColorContainer/ScrollContainer" unique_id=439133239]
+layout_mode = 2
+
+[node name="ColorPicker" type="ColorPicker" parent="AvatarMargin/EditAvatarColor/EditColorContainer/ScrollContainer/VBoxContainer" unique_id=441081744]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+edit_alpha = false
+edit_intensity = false
+
+[node name="EditAvatarBttn" type="TextureButton" parent="AvatarMargin/EditAvatarColor" unique_id=168390789]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_vlyrn")
+layout_mode = 2
+size_flags_horizontal = 3
+texture_normal = ExtResource("6_g0npv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="AvatarMargin/EditAvatarColor/EditAvatarBttn" unique_id=1793313300 instance=ExtResource("5_wnwkq")]
+
+[node name="Label" parent="AvatarMargin/EditAvatarColor/EditAvatarBttn/Tooltip" index="0" unique_id=1664376752]
+text = "Edit avatar"
+
+[node name="AvatarFileDialog" type="FileDialog" parent="AvatarMargin/EditAvatarColor" unique_id=577254778]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Open a File"
+position = Vector2i(0, 36)
+size = Vector2i(600, 360)
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.png, *.jpg, *.jpeg;Image Files")
+
+[node name="DescriptionMargin" type="MarginContainer" parent="." unique_id=921203568]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 8
+
+[node name="EditDescription" type="TextEdit" parent="DescriptionMargin" unique_id=140834483]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="color_changed" from="AvatarMargin/EditAvatarColor/EditColorContainer/ScrollContainer/VBoxContainer/ColorPicker" to="." method="_on_color_picker_color_changed"]
+[connection signal="pressed" from="AvatarMargin/EditAvatarColor/EditAvatarBttn" to="." method="_on_edit_avatar_bttn_pressed"]
+[connection signal="canceled" from="AvatarMargin/EditAvatarColor/AvatarFileDialog" to="." method="_on_avatar_file_dialog_canceled"]
+[connection signal="confirmed" from="AvatarMargin/EditAvatarColor/AvatarFileDialog" to="." method="_on_avatar_file_dialog_confirmed"]
+[connection signal="file_selected" from="AvatarMargin/EditAvatarColor/AvatarFileDialog" to="." method="_on_avatar_file_dialog_file_selected"]
+[connection signal="text_changed" from="DescriptionMargin/EditDescription" to="." method="_on_edit_description_text_changed"]
+
+[editable path="AvatarMargin/EditAvatarColor/EditAvatarBttn/Tooltip"]

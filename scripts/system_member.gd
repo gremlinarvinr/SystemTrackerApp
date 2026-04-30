@@ -3,7 +3,7 @@ extends PanelContainer
 @export var member_id:int
 @export var member_name:String # TODO: validate length
 @export var member_color:Color 
-@export var member_avatar:Texture2D
+@export var member_avatar:ImageTexture
 @export var pronouns:String # TODO: validate length
 @export var member_short_desc:String # TODO: validate length
 
@@ -16,7 +16,8 @@ func _ready() -> void:
 	%NameLabel.text = member_name 
 	%PronounsLabel.text = pronouns
 	%ShortDescLabel.text = member_short_desc
-	
+
+
 func on_save_data(saved_members:Array[SavedMemberData], fronting_members:Array[SavedMemberData]):
 	var my_data = SavedMemberData.new()
 	my_data.member_name = member_name
@@ -43,6 +44,9 @@ func on_load_data(saved_data:SavedMemberData, new_id:int):
 	
 	pronouns = saved_data.pronouns
 	%PronounsLabel.text = pronouns
+	
+	#member_avatar = saved_data.member_avatar
+	#%Avatar.texture = member_avatar
 	
 	member_short_desc = saved_data.member_short_desc
 	%ShortDescLabel.text = member_short_desc

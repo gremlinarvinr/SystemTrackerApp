@@ -4,6 +4,7 @@ extends Node
 # TY https://github.com/IndieQuest/Modular-tooltip/blob/master/Tooltip.gd FOR HELP
 var padding = Vector2i(15, 15)
 var offset = Vector2i(5, 5)
+# FIXME: maybe offset diff vs left/right? ? ?  
 
 var extents
 var final_x:int

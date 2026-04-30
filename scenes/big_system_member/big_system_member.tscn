@@ -1,0 +1,193 @@
+[gd_scene format=3 uid="uid://c1feug8ly8f2o"]
+
+[ext_resource type="Script" uid="uid://dhsc17q1tjcch" path="res://scripts/ui/big_system_member.gd" id="1_reeee"]
+[ext_resource type="FontFile" uid="uid://wtrcngvpj0kr" path="res://assets/fonts/Swansea-q3pd.ttf" id="2_8bjs2"]
+[ext_resource type="Shader" uid="uid://djrlxspf05q68" path="res://assets/shaders/invert_shader.gdshader" id="3_dqivo"]
+[ext_resource type="Texture2D" uid="uid://bbiyfhdmadet1" path="res://assets/icons/pencil-solid-full.svg" id="4_pbfqf"]
+[ext_resource type="PackedScene" uid="uid://btsirhtouiwm3" path="res://scenes/tooltip.tscn" id="5_gjiie"]
+[ext_resource type="Texture2D" uid="uid://cwb1glpcx2jpy" path="res://assets/icons/floppy-disk-solid-full.svg" id="6_4uhrq"]
+[ext_resource type="Texture2D" uid="uid://dtb57qab2rtxw" path="res://assets/icons/x-solid-full.svg" id="7_50vyl"]
+[ext_resource type="Texture2D" uid="uid://2og1n34iut8b" path="res://circle-user-solid-full.svg" id="8_nox3h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3a6ld"]
+shader = ExtResource("3_dqivo")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kujd2"]
+shader = ExtResource("3_dqivo")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_beg0a"]
+shader = ExtResource("3_dqivo")
+shader_parameter/invert = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u0pgc"]
+shader = ExtResource("3_dqivo")
+shader_parameter/invert = false
+
+[node name="BigSystemMember" type="VBoxContainer" unique_id=766815764]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_reeee")
+
+[node name="TopBarMargin" type="MarginContainer" parent="." unique_id=1262495375]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 10
+
+[node name="TopBar" type="HBoxContainer" parent="TopBarMargin" unique_id=2048097346]
+layout_mode = 2
+
+[node name="NamePronounsVBox" type="VBoxContainer" parent="TopBarMargin/TopBar" unique_id=2139997367]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="NameLabel" type="Label" parent="TopBarMargin/TopBar/NamePronounsVBox" unique_id=580056636]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_8bjs2")
+theme_override_font_sizes/font_size = 20
+text = "Big Member Name"
+vertical_alignment = 1
+max_lines_visible = 1
+
+[node name="PronounsLabel" type="Label" parent="TopBarMargin/TopBar/NamePronounsVBox" unique_id=1421782984]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8bjs2")
+theme_override_font_sizes/font_size = 18
+text = "they/them"
+
+[node name="EditNamePrnnVBox" type="VBoxContainer" parent="TopBarMargin/TopBar" unique_id=1070090113]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EditName" type="LineEdit" parent="TopBarMargin/TopBar/EditNamePrnnVBox" unique_id=654477908]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_fonts/font = ExtResource("2_8bjs2")
+theme_override_font_sizes/font_size = 20
+text = "Big Member Name"
+
+[node name="EditPronouns" type="LineEdit" parent="TopBarMargin/TopBar/EditNamePrnnVBox" unique_id=1588058613]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_8bjs2")
+theme_override_font_sizes/font_size = 18
+text = "they/them"
+
+[node name="EditPage" type="TextureButton" parent="TopBarMargin/TopBar" unique_id=239178105]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_3a6ld")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("4_pbfqf")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="TopBarMargin/TopBar/EditPage" unique_id=1793313300 instance=ExtResource("5_gjiie")]
+
+[node name="Label" parent="TopBarMargin/TopBar/EditPage/Tooltip" index="0" unique_id=1664376752]
+text = "edit basic info"
+
+[node name="SaveBttn" type="TextureButton" parent="TopBarMargin/TopBar" unique_id=1462480528]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_kujd2")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("6_4uhrq")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ExitBttn" type="TextureButton" parent="TopBarMargin/TopBar" unique_id=1193230684]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_beg0a")
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+texture_normal = ExtResource("7_50vyl")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="TopBarMargin/TopBar/ExitBttn" unique_id=44518852 instance=ExtResource("5_gjiie")]
+
+[node name="Label" parent="TopBarMargin/TopBar/ExitBttn/Tooltip" index="0" unique_id=1664376752]
+text = "Back to member list"
+
+[node name="TabStripMargin" type="MarginContainer" parent="." unique_id=2113529351]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="TabStrip" type="HBoxContainer" parent="TabStripMargin" unique_id=1527146216]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TabStripMargin/TabStrip" unique_id=595251240]
+layout_mode = 2
+
+[node name="MainPageBttn" type="TextureButton" parent="TabStripMargin/TabStrip/MarginContainer" unique_id=455085225 groups=["tab_strip_buttons"]]
+unique_name_in_owner = true
+material = SubResource("ShaderMaterial_u0pgc")
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+texture_normal = ExtResource("8_nox3h")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Tooltip" parent="TabStripMargin/TabStrip/MarginContainer/MainPageBttn" unique_id=1405992932 instance=ExtResource("5_gjiie")]
+
+[node name="Label" parent="TabStripMargin/TabStrip/MarginContainer/MainPageBttn/Tooltip" index="0" unique_id=1664376752]
+text = "Main info"
+
+[node name="SavePromptHolder" type="Control" parent="." unique_id=1976504399]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SavePromptHolder" unique_id=690032894]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -140.0
+offset_right = 140.0
+offset_bottom = 31.0
+grow_horizontal = 2
+
+[node name="SavePrompt" type="Button" parent="SavePromptHolder/HBoxContainer" unique_id=1514441151]
+layout_mode = 2
+text = "Save changes"
+
+[node name="DontSavePrompt" type="Button" parent="SavePromptHolder/HBoxContainer" unique_id=927815102]
+layout_mode = 2
+text = "Don't save changes"
+
+[node name="PageHolder" type="Control" parent="." unique_id=1107564018]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[connection signal="mouse_entered" from="TopBarMargin/TopBar/EditPage" to="TopBarMargin/TopBar/EditPage/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TopBarMargin/TopBar/EditPage" to="TopBarMargin/TopBar/EditPage/Tooltip" method="_on_mouse_exited"]
+[connection signal="pressed" from="TopBarMargin/TopBar/EditPage" to="." method="_on_edit_page_pressed"]
+[connection signal="pressed" from="TopBarMargin/TopBar/SaveBttn" to="." method="_on_save_prompt_pressed"]
+[connection signal="pressed" from="TopBarMargin/TopBar/ExitBttn" to="." method="_on_exit_bttn_pressed"]
+[connection signal="mouse_entered" from="TabStripMargin/TabStrip/MarginContainer/MainPageBttn" to="TabStripMargin/TabStrip/MarginContainer/MainPageBttn/Tooltip" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="TabStripMargin/TabStrip/MarginContainer/MainPageBttn" to="TabStripMargin/TabStrip/MarginContainer/MainPageBttn/Tooltip" method="_on_mouse_exited"]
+[connection signal="pressed" from="TabStripMargin/TabStrip/MarginContainer/MainPageBttn" to="." method="_on_main_page_bttn_pressed"]
+[connection signal="pressed" from="SavePromptHolder/HBoxContainer/SavePrompt" to="." method="_on_save_prompt_pressed"]
+[connection signal="pressed" from="SavePromptHolder/HBoxContainer/DontSavePrompt" to="." method="_on_dont_save_prompt_pressed"]
+
+[editable path="TopBarMargin/TopBar/EditPage/Tooltip"]
+[editable path="TopBarMargin/TopBar/ExitBttn/Tooltip"]
+[editable path="TabStripMargin/TabStrip/MarginContainer/MainPageBttn/Tooltip"]
